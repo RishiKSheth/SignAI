@@ -24,15 +24,23 @@ def detectHumanHands(frame_rgb):
                 mp_drawing.DrawingSpec(color=(255, 0, 0),
                                        thickness=2, circle_radius=2)
             )
-            #draws circle
+            #hand landmarks y (tips)
+            thumb_tip_y = hand_landmarks.landmark[mp_hands.HandLandmark.THUMB_TIP].y
+            index_finger_tip_y = hand_landmarks.landmark[mp_hands.HandLandmark.INDEX_FINGER_TIP].y
+            middle_finger_tip_y = hand_landmarks.landmark[mp_hands.HandLandmark.MIDDLE_FINGER_TIP].y
+            ring_finger_tip_y = hand_landmarks.landmark[mp_hands.HandLandmark.RING_FINGER_TIP].y
+            pinky_finger_tip_y = hand_landmarks.landmark[mp_hands.HandLandmark.PINKY_TIP].y
+
+            #draws circle in for loop
             x_coords = [landmark.x for landmark in hand_landmarks.landmark]
             y_coords = [landmark.y for landmark in hand_landmarks.landmark]
             center_x = sum(x_coords) / len(x_coords)
             center_y = sum(y_coords) / len(y_coords)
             center_x_px = int(center_x * frame_rgb.shape[1])
             center_y_px = int(center_y * frame_rgb.shape[0])
+            cv2.circle(frame_rgb, (center_x_px, center_y_px), 155, (0,0,0), 10)
 
-            cv2.circle(frame_rgb, (center_x_px, center_y_px), 180, (0,0,0), 10)
+
     return frame_rgb
 
 while True:
