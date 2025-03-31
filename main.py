@@ -30,6 +30,25 @@ def detectHumanHands(frame_rgb):
             middle_finger_tip_y = hand_landmarks.landmark[mp_hands.HandLandmark.MIDDLE_FINGER_TIP].y
             ring_finger_tip_y = hand_landmarks.landmark[mp_hands.HandLandmark.RING_FINGER_TIP].y
             pinky_finger_tip_y = hand_landmarks.landmark[mp_hands.HandLandmark.PINKY_TIP].y
+            #conversion to pixels
+            thumb_tip_y_pixels = thumb_tip_y * frame.shape[0]
+            index_finger_tip_y_pixels = index_finger_tip_y * frame.shape[0]
+            middle_finger_tip_y_pixels = middle_finger_tip_y * frame.shape[0]
+            ring_finger_tip_y_pixels = ring_finger_tip_y * frame.shape[0]
+            pinky_finger_tip_y_pixels = pinky_finger_tip_y * frame.shape[0]
+            #The Letter Case A
+            if (thumb_tip_y_pixels < index_finger_tip_y_pixels and
+                    thumb_tip_y_pixels < middle_finger_tip_y_pixels and
+                    thumb_tip_y_pixels < ring_finger_tip_y_pixels and
+                    thumb_tip_y_pixels < pinky_finger_tip_y_pixels):
+                print('THE LETTER A')
+            #The Middle Finger
+            if (middle_finger_tip_y_pixels < index_finger_tip_y_pixels and
+                    middle_finger_tip_y_pixels < ring_finger_tip_y_pixels and
+                    middle_finger_tip_y_pixels < pinky_finger_tip_y_pixels and
+                    middle_finger_tip_y_pixels < thumb_tip_y_pixels):
+                print("FUCK YOU ")
+
 
             #draws circle in for loop
             x_coords = [landmark.x for landmark in hand_landmarks.landmark]
